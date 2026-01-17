@@ -13,6 +13,7 @@ public class WorkOrderQueryService
     public async Task<ActiveWorkOrderDto> GetActiveByLineAsync(Guid lineId)
     {
         var wo = await _context.WorkOrders
+            .AsNoTracking()
             .Where(x => x.ProductionLineId == lineId && x.Status == WorkOrderStatus.Active)
             .OrderByDescending(x => x.ActualStart)
             .FirstOrDefaultAsync();
@@ -22,6 +23,7 @@ public class WorkOrderQueryService
 
         // ProducedQuantity ni ProductionResults dan hisoblaymiz (eng ishonchli)
         var produced = await _context.ProductionResults
+            .AsNoTracking()
             .Where(x => x.WorkOrderId == wo.Id)
             .SumAsync(x => x.GoodCount + x.DefectCount);
 

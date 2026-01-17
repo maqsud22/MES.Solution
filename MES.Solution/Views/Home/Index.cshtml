@@ -1,8 +1,144 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="dashboard-header">
+    <div>
+        <h1>Dashboard</h1>
+        <p class="muted">Production lines overview, uptime, and operator insights.</p>
+    </div>
+    <div class="time-card">
+        <div class="time">10:55</div>
+        <div class="date">April 24, 2024</div>
+    </div>
+</section>
+
+<section class="dashboard-grid">
+    <div class="card card-lines">
+        <div class="card-header">
+            <h2>Line Status</h2>
+            <span class="pill">Live</span>
+        </div>
+        <div class="line-list">
+            <div class="line-row running">
+                <div class="line-title">
+                    <strong>Line 1</strong>
+                    <span>Running</span>
+                </div>
+                <div class="line-metric">48</div>
+                <div class="line-progress">
+                    <div class="progress-bar" style="width:60%"></div>
+                    <div class="progress-meta">60%</div>
+                </div>
+            </div>
+            <div class="line-row stopped">
+                <div class="line-title">
+                    <strong>Line 2</strong>
+                    <span>Stopped</span>
+                </div>
+                <div class="line-metric">0</div>
+                <div class="line-progress">
+                    <div class="progress-bar" style="width:0%"></div>
+                    <div class="progress-meta">0%</div>
+                </div>
+            </div>
+            <div class="line-row paused">
+                <div class="line-title">
+                    <strong>Line 3</strong>
+                    <span>Paused</span>
+                </div>
+                <div class="line-metric">30</div>
+                <div class="line-progress">
+                    <div class="progress-bar" style="width:72%"></div>
+                    <div class="progress-meta">72%</div>
+                </div>
+            </div>
+            <div class="line-row running">
+                <div class="line-title">
+                    <strong>Line 4</strong>
+                    <span>Running</span>
+                </div>
+                <div class="line-metric">36</div>
+                <div class="line-progress">
+                    <div class="progress-bar" style="width:85%"></div>
+                    <div class="progress-meta">85%</div>
+                </div>
+            </div>
+            <div class="line-row paused">
+                <div class="line-title">
+                    <strong>Line 5</strong>
+                    <span>Paused</span>
+                </div>
+                <div class="line-metric">18</div>
+                <div class="line-progress">
+                    <div class="progress-bar" style="width:20%"></div>
+                    <div class="progress-meta">20%</div>
+                </div>
+            </div>
+        </div>
+        <div class="line-footer">
+            <div>
+                <div class="stat-label">UPH last hour</div>
+                <div class="stat-value">32</div>
+            </div>
+            <div>
+                <div class="stat-label">Units last hour</div>
+                <div class="stat-value">1.3k</div>
+            </div>
+            <div>
+                <div class="stat-label">NOK last hour</div>
+                <div class="stat-value danger">692</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-workers">
+        <div class="card-header">
+            <h2>Total Workers</h2>
+            <span class="pill secondary">Shift A</span>
+        </div>
+        <div class="big-number">68</div>
+        <div class="workers-breakdown">
+            <div>
+                <div class="stat-label">Active</div>
+                <div class="stat-value success">50</div>
+            </div>
+            <div>
+                <div class="stat-label">On Break</div>
+                <div class="stat-value warning">24</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-trend">
+        <div class="card-header">
+            <h2>UPH last 10 min</h2>
+            <span class="pill">Realtime</span>
+        </div>
+        <div class="trend-chart">
+            <div class="trend-line"></div>
+        </div>
+        <div class="trend-footer">
+            <span>5 min avg 54 UPH</span>
+            <span class="trend-indicator">↗ steady</span>
+        </div>
+    </div>
+
+    <div class="card card-downtime">
+        <div class="card-header">
+            <h2>Last Downtime</h2>
+            <span class="pill danger">Critical</span>
+        </div>
+        <div class="downtime-info">
+            <div>
+                <div class="downtime-code">D-012</div>
+                <div class="downtime-time">25 min</div>
+                <div class="muted">D9 - Net Issue</div>
+            </div>
+            <div class="downtime-badge">SO</div>
+        </div>
+        <div class="downtime-footer">
+            <span>Updated 10:55 AM</span>
+        </div>
+    </div>
+</section>
