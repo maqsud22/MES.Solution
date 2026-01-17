@@ -13,8 +13,8 @@ public class UnitQueryService
     {
         // Oxirgi scan vaqtini StationScans dan olamiz
         var query =
-            from u in _context.ProductionUnits
-            join s in _context.StationScans on u.Id equals s.ProductionUnitId into scans
+            from u in _context.ProductionUnits.AsNoTracking()
+            join s in _context.StationScans.AsNoTracking() on u.Id equals s.ProductionUnitId into scans
             where u.ProductionLineId == lineId
             let lastScan = scans.OrderByDescending(x => x.ScannedAt).FirstOrDefault()
             orderby lastScan != null ? lastScan.ScannedAt : DateTime.MinValue descending
