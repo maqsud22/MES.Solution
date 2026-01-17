@@ -19,7 +19,7 @@ if (string.IsNullOrWhiteSpace(connectionString))
         "Missing connection string. Set ConnectionStrings__DefaultConnection via environment variables or user secrets.");
 }
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContextPool<AppDbContext>(options =>
     options.UseSqlServer(
         connectionString,
         b => b.MigrationsAssembly("MES.Infrastructure")
@@ -87,6 +87,12 @@ builder.Services.AddAuthorization(options =>
 });
 
 // =======================================
+// INFRASTRUCTURE
+// =======================================
+builder.Services.AddResponseCompression();
+builder.Services.AddHealthChecks();
+
+// =======================================
 // CONTROLLERS & SWAGGER
 // =======================================
 builder.Services.AddControllers(options =>
@@ -134,13 +140,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHsts();
+}
 
 app.UseHttpsRedirection();
+
+app.UseResponseCompression();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/health").AllowAnonymous();
 
 // =======================================
 // DATABASE SEED

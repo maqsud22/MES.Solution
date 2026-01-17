@@ -23,6 +23,7 @@ public class OeeService
 
         // 2) Downtime (overlap bilan)
         var downtimes = await _context.DowntimeLogs
+            .AsNoTracking()
             .Where(x => x.ProductionLineId == lineId
                         && x.StartTime < to
                         && (x.EndTime ?? DateTime.UtcNow) > from)
@@ -47,6 +48,7 @@ public class OeeService
 
         // 4) ProductionResults (period ichida)
         var results = await _context.ProductionResults
+            .AsNoTracking()
             .Where(x => x.ProductionLineId == lineId
                         && x.Timestamp >= from
                         && x.Timestamp <= to)
@@ -57,6 +59,7 @@ public class OeeService
 
         // 5) IdealTimeSum (perioddagi WO lar bo‘yicha weighted)
         var workOrders = await _context.WorkOrders
+            .AsNoTracking()
             .Where(x => x.ProductionLineId == lineId
                         && x.PlannedStart < to
                         && x.PlannedEnd > from)
