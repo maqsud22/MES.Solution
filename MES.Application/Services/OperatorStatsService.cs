@@ -61,8 +61,9 @@ public class OperatorStatsService
             join op in _context.Operators on s.OperatorId equals op.Id
             join st in _context.Stations on s.StationId equals st.Id
             where s.OperatorId != null
-                  && s.ScannedAt >= from && s.ScannedAt < to
-                  && (lineId == null || s.ProductionLineId == lineId)
+                && s.ScannedAt >= from
+                && s.ScannedAt < to
+                && (lineId == null || s.ProductionLineId == lineId)
             select new { op.Id, op.FullName, st.Type };
 
         var list = await q.ToListAsync();
